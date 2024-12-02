@@ -2,7 +2,6 @@
 *.pt
 *.mov
 *.pth
-*.json
 *.mov
 *.npz
 *.npy
@@ -10,7 +9,12 @@
 *.onnx
 *.tar
 *.bin
+*.pyc
 cache*
 .DS_Store
 *DS_Store
 outputs/
+artist/
+tools/
+utils/
+__pycache__

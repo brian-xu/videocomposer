@@ -1,0 +1,14 @@
+{
+    "name": "videocomposer Dev Container",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "videocomposer",
+    "workspaceFolder": "/workspace",
+    "shutdownAction": "stopCompose",
+    "extensions": [
+        "mutantdino.resourcemonitor",
+        "ms-azuretools.vscode-docker",
+        "nvidia.nsight-vscode-edition",
+        "ms-python.python",
+        "charliermarsh.ruff"
+    ]
+}
