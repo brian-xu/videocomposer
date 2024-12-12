@@ -38,7 +38,7 @@ RUN export TORCH_CUDA_ARCH_LIST="$(echo "$CUDA_ARCHITECTURES" | tr ';' '\n' | aw
     export FORCE_CUDA=1 && \
     pip install --no-cache-dir open-clip-torch==2.0.2  transformers==4.18.0 flash-attn==0.2 xformers==0.0.13 motion-vector-extractor==1.0.6 && \
     pip install --no-cache-dir simplejson pynvml easydict fairscale oss2 scikit-video scikit-image imageio ipdb rotary-embedding-torch==0.2.1 && \
-    pip install --no-cache-dir pytorch-lightning==1.4.2 torchmetrics==0.6.0
+    pip install --no-cache-dir pytorch-lightning==1.4.2 torchmetrics==0.6.0 opencv-contrib-python
 
         
 # Fix permissions
