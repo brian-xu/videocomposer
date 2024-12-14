@@ -1,12 +1,17 @@
-from scripts.run_autoencoder import run_autoencoder
+from scripts.calculate_bbox_movement import translate_bbox
 import uuid, os
 import cv2
+from PIL import Image
 from utils.config import Config
 
 from tools.videocomposer.inference_single import inference_single
 
 cfg = Config(load=True)
-cfg.cfg_dict["style_image"] = cfg.cfg_dict["image_path"]
+sam_output_dir = "/workspace/submodules/mask_segmentation/output"
+input_image = os.path.join(sam_output_dir, "cropped_input_image.jpeg")
+
+cfg.cfg_dict["image_path"] = input_image
+cfg.cfg_dict["style_image"] = input_image
 
 experiment_name = str(uuid.uuid4())[:8]
 experiment_path = os.path.join(os.getcwd(), "outputs", experiment_name)
@@ -14,25 +19,24 @@ os.mkdir(experiment_path)
 
 print("Intermediate outputs will be stored at", experiment_path)
 
-# fill these in
-# masks = run_autoencoder(image_mask, video_mask)
-
-# TODO: replace test code below
 paths = []
-for entry in os.scandir("/workspace/DAVIS/Annotations/480p/bear"):
+# for entry in os.scandir(os.path.join(sam_output_dir, "segmentation_output")):
+for entry in os.scandir("/workspace/DAVIS/Annotations/480p/rollerblade"):
     paths.append(entry.path)
 
 paths.sort()
+image_mask = Image.open(os.path.join(sam_output_dir, "input_image_mask.jpeg"))
 video_mask = []
 for path in paths:
-    if path[-4:] == ".png":
-        img = cv2.imread(path)
-        video_mask.append(img)
-masks = run_autoencoder(video_mask[0], video_mask)
+    if path[-4:] != ".png":
+        continue
+    img = Image.open(path)
+    video_mask.append(img)
+masks = translate_bbox(image_mask, video_mask)
 
 edges = []
 for mask in masks:
-    edge = cv2.Canny(mask, 1, 255)
+    edge = cv2.Canny(mask, 1, 200)
     edges.append(edge)
 
 height, width = edges[0].shape

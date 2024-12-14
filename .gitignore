@@ -19,3 +19,4 @@ tools/
 utils/ 
 DAVIS/
 __pycache__
+submodules/checkpoints

@@ -1,3 +1,6 @@
 [submodule "submodules/mask_autoencoder"]
 	path = submodules/mask_autoencoder
 	url = https://github.com/brian-xu/SAM-IAM-autoencoder.git
+[submodule "submodules/mask_segmentation"]
+	path = submodules/mask_segmentation
+	url = https://github.com/dominicchui/sam-iam-segmentation.git
